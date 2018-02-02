@@ -1,0 +1,58 @@
+netcdf ocean.0001-0010.sss {
+dimensions:
+	time = UNLIMITED ; // (10 currently)
+	nv = 2 ;
+	yh = 320 ;
+	xh = 360 ;
+variables:
+	double nv(nv) ;
+		nv:long_name = "vertex number" ;
+		nv:units = "none" ;
+		nv:cartesian_axis = "N" ;
+	float sss(time, yh, xh) ;
+		sss:long_name = "Sea Surface Salinity" ;
+		sss:units = "psu" ;
+		sss:missing_value = -1.e+34f ;
+		sss:_FillValue = -1.e+34f ;
+		sss:cell_measures = "area: area_t" ;
+		sss:cell_methods = "area:mean yh:mean xh:mean time: mean" ;
+		sss:time_avg_info = "average_T1,average_T2,average_DT" ;
+	double time(time) ;
+		time:long_name = "time" ;
+		time:units = "days since 0001-01-01 00:00:00" ;
+		time:cartesian_axis = "T" ;
+		time:calendar_type = "JULIAN" ;
+		time:calendar = "JULIAN" ;
+		time:bounds = "time_bnds" ;
+	double time_bnds(time, nv) ;
+		time_bnds:long_name = "time axis boundaries" ;
+		time_bnds:units = "days" ;
+		time_bnds:missing_value = 1.e+20 ;
+		time_bnds:_FillValue = 1.e+20 ;
+	double xh(xh) ;
+		xh:long_name = "h point nominal longitude" ;
+		xh:units = "degrees_east" ;
+		xh:cartesian_axis = "X" ;
+	double yh(yh) ;
+		yh:long_name = "h point nominal latitude" ;
+		yh:units = "degrees_north" ;
+		yh:cartesian_axis = "Y" ;
+	double average_T1(time) ;
+		average_T1:long_name = "Start time for average period" ;
+		average_T1:units = "days since 0001-01-01 00:00:00" ;
+	double average_T2(time) ;
+		average_T2:long_name = "End time for average period" ;
+		average_T2:units = "days since 0001-01-01 00:00:00" ;
+	double average_DT(time) ;
+		average_DT:long_name = "Length of average period" ;
+		average_DT:units = "days" ;
+
+// global attributes:
+		:filename = "ocean.0001-0010.sss.nc" ;
+		:title = "SPEAR_c96_o1_Control_1850_E50" ;
+		:associated_files = "area_t: 00010101.ocean_static.nc" ;
+		:grid_type = "regular" ;
+		:grid_tile = "N/A" ;
+		:external_variables = "area_t" ;
+		:comment = "FMS time averaging, version 3.0, precision=double" ;
+}
